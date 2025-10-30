@@ -1,66 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Conectasocial</title>
-        <link rel ="stylesheet" href="css/style.css">
-    </head>
-    <body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ConectaSocial - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
 
-        <header>
-    	    <h1 id="titulo principal" class= "titulo">login</h1>
-        </header>
-        <main>
-            <div class="container">
-    	        <p>Gerencie suas campanhas, cadastre projetos e acompanhe o impacto das suas ações.
-                Use seu e-mail e senha cadastrados para acessar o painel administrativo.</p>
-                <div class="caixa">
-                    <form action="#" method="post">
-                        
-                        <legend style="color: white;">Preencha seus dados</legend>
+<body>
 
-                        <label for="email">E-mail:</label>
-                        <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required><br><br>
+  <header>
+    <h1 id="titulo-principal" class="titulo">Login</h1>
+  </header>
 
-                        <label for="senha">Senha:</label>
-                        <input type="password" id="senha" name="senha" placeholder="Digite uma senha" required><br><br>
-                        <label for="tipo">Tipo de conta</label>
-                        <select id="tipo" name="tipo" required>
-                            <option value="">Selecione...</option>
-                            <option value="ong">Sou uma ONG</option>
-                            <option value="voluntario">Sou Voluntário</option><br></br>                           
-                        </select>                        
-                        <br><br>
-                        
+  <main>
+    <section class="container">
+      <h3>
+        Gerencie suas campanhas, cadastre projetos e acompanhe o impacto das suas ações.
+        Use seu e-mail e senha cadastrados para acessar o painel administrativo.
+      </h3>
 
-                        <label>
-                            <input type="checkbox" name="termos" required> Aceito os termos de uso
-                        </label><br><br>
+      <div class="caixa">
+        <form action="#" method="post">
+          <fieldset>
+            
 
-                        <input type="submit" value="Cadastrar">
-                        <input type="reset" value="Limpar">
-                        <br><br>
-        	    
-                        <a href="cadastro.html" target="_blank" rel="noopener noreferrer">
-                        <p style="color: white;">Não tem conta? Cadastre-se aqui</p>
-                        </a>
-                        <a href="recupera.html" target="_blank" rel="noopener noreferrer">
-                        <p style="color: white;">Esqueceu sua senha? Recupere aqui</p>
-                        </a>
-                    </form>
-                </div>
-            </div>
-            <a href="index.html" target="_self" rel="noopener noreferrer">
-            <button class="botao">voltar ao menu principal</button>
-          
-            <footer class="rodapé">
-                <p>© 2025 ConectaSocial — Conectando pessoas e causas.<br>
-                Contato: contato@conectasocial.org | Instagram @conectasocial</p>
-                <p>“A solidariedade é o que transforma boas intenções em impacto real.”</p>
-                
-            </footer>
-        </main> 
-        <script src="script/script_site.js"></script> 
-    </body>
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required><br><br>
+
+            <label for="senha">Senha:</label><br>
+            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required><br><br>
+
+            <label for="tipo">Tipo de conta:</label><br>
+            <select id="tipo" name="tipo" required>
+              <option value="">Selecione...</option>
+              <option value="ong">Sou uma ONG</option>
+              <option value="voluntario">Sou Voluntário</option>
+            </select><br><br>
+
+            <label>
+              <input type="checkbox" name="termos" required> Aceito os termos de uso
+            </label><br><br>
+
+            <input type="submit" value="Entrar">
+            <input type="reset" value="Limpar">
+          </fieldset>
+        </form>
+
+        <p><a href="cadastro.html" target="_self" rel="noopener noreferrer">Não tem conta? Cadastre-se aqui</a></p>
+        <p><a href="recupera.html" target="_self" rel="noopener noreferrer">Esqueceu sua senha? Recupere aqui</a></p>
+      </div>
+    </section>
+
+    
+      <br><a href="index.html" class="botao" target="_self" rel="noopener noreferrer">
+          voltar ao menu principal
+            </a>
+     
+  </main>
+
+  <footer class="rodapé">
+    <p>© 2025 ConectaSocial — Conectando pessoas e causas.</p>
+    <p>Contato:mailto:contato@conectasocial.org">contato@conectasocial.org | Instagram: @conectasocial</p>
+    <p>“A solidariedade é o que transforma boas intenções em impacto real.”</p>
+  </footer>
+
+  <script src="script/script_site.js"></script>
+</body>
 </html>
