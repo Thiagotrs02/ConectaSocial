@@ -1,0 +1,212 @@
+/* ==== ESTILO GERAL ==== */
+body {
+    font-family: Arial, Helvetica, sans-serif; /* define a fonte padrão */
+    margin: 0; /* remove a margem padrão ao redor da página */
+    background-color: #f0f8ff; /* cor de fundo clara */
+    color: #000000; /* cor do texto */
+    line-height: 1.6; /* espaçamento entre linhas para melhor leitura */
+    padding: 0; /* remove o espaçamento padrão ao redor da página */
+}
+
+/* ==== CABEÇALHO ==== */
+header {
+    background-color: rgb(4, 0, 255); /* cor de fundo azul */
+    text-align: center; 
+    font-size: 24px; 
+    padding: 20px; /* espaçamento interno */
+    margin-bottom: 40px; /* espaçamento externo inferior */
+}
+.menu-navegação {
+    
+    overflow: hidden; /* evita que o conteúdo "vaze" do contêiner e limpa possíveis flutuações (floats) */
+    font-size: 16px; 
+    color: rgb(18, 154, 172); 
+    text-align: center; /* centraliza o texto dentro do contêiner */
+    padding: 14px 16px; /* adiciona espaçamento interno (14px em cima/baixo e 16px nos lados) */
+    text-decoration: none; /* remove sublinhado (caso o texto seja link) */
+}
+
+/* ======= CADA ITEM (li) DO MENU ======= */
+.menu-navegação li {
+    float: left; /* faz com que os itens fiquem um ao lado do outro (horizontalmente) */
+    list-style-type: none; /* remove as bolinhas (marcadores) padrão da lista */
+}
+
+/* ======= LINKS DENTRO DOS ITENS (a) ======= */
+.menu-navegação li a {
+    text-align: center; /* centraliza o texto dentro do botão/link */
+    font-family: Comic Sans MS; /* define a fonte do texto (Comic Sans) */
+    display: block; /* faz o link ocupar toda a área do botão, facilitando o clique */
+    color: rgb(255, 255, 255); /* define a cor do texto como branca */
+    padding: 8px 16px; /* cria espaço interno no botão (alto e lados) */
+    text-decoration: none; /* remove o sublinhado padrão dos links */
+}
+
+/* ======= EFEITO QUANDO O MOUSE PASSA POR CIMA ======= */
+.menu-navegação li a:hover {
+    background-color: #b7ddf7; /* muda a cor de fundo ao passar o mouse (azul claro) */
+    color: white; /* mantém o texto branco no hover */
+    border-radius: 12px; /* arredonda os cantos do botão */
+}
+
+
+.titulo {
+    color: #b7ddf7; /* cor do texto azul claro */
+    text-shadow: #508eeb 2px 2px 2px; /* sombra azul para o texto */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* fonte divertida */
+    margin: 0; /* remove a margem ao redor do título */
+}
+
+/* ==== BOTÕES ==== */
+.botao {
+    background-color: white; 
+    border: none;
+    color: black;
+    padding: 16px 32px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2), 
+                0 6px 20px rgba(0,0,0,0.19); 
+}
+
+.botao:hover {
+    background-color: #b7ddf7; 
+    color: white;
+}
+
+/* ==== CONTAINERS ==== */
+.container_relatos,
+.ong-lista {
+    background-image: url(photos/luke-chesser-pJadQetzTkI-unsplash.jpg); 
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.container {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    width: 100%;
+}
+.container_principal {
+   
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+/* ==== CAIXAS E CARDS ==== */
+.caixa,
+.ong-card,
+.relatos {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(33% - 20px);
+    box-sizing: border-box;
+}
+
+/* ==== CAIXA COM IMAGEM DE FUNDO ==== */
+.caixa {
+   
+    background-image: url("photos/Gemini_Generated_Image_q1un6eq1un6eq1un.png");
+    background-size: cover;
+    background-position: center;
+}
+.box_info {
+    font-family: Comic Sans MS;
+    color: white;
+    background-image: url(photos/educaconecta_primeirapag.png);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ==== FORMATAÇÃO DE TEXTO ==== */
+label {
+    color: white;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* ==== IMAGENS ==== */
+img {
+    text-align: center ;
+    margin: 0 auto;
+    width: 30%;
+    height: 30%;
+    display: block;
+}
+
+
+/* ==== RODAPÉ ==== */
+.rodapé {
+    background-color: rgb(4, 0, 255);
+    text-align: center;
+    font-size: 16px;
+    color: #fffafa;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* ==== 🔁 RESPONSIVIDADE ==== */
+
+/* 📱 Celulares */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 22px;
+    }
+
+    .caixa,
+    .ong-card,
+    .relatos {
+        width: 100%;
+    }
+
+    .botao {
+        width: 90%;
+        font-size: 15px;
+    }
+
+    body {
+        padding: 10px;
+    }
+}
+
+/* 📲 Tablets */
+@media (min-width: 601px) and (max-width: 900px) {
+    .caixa,
+    .ong-card,
+    .relatos {
+        width: 45%;
+    }
+}
+
+/* 💻 Monitores grandes */
+@media (min-width: 901px) {
+    .caixa,
+    .ong-card,
+    .relatos {
+        width: calc(33% - 20px);
+    }
+}
