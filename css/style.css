@@ -16,6 +16,68 @@ header {
     padding: 20px; /* espaçamento interno */
     margin-bottom: 40px; /* espaçamento externo inferior */
 }
+/* Estilo para o Body quando estiver no Modo Escuro */
+.dark-mode {
+    background-color: #1a1a2e; /* Fundo escuro */
+    color: #e0e0e0; /* Texto claro */
+}
+
+/* Estilo para elementos que precisam de mudança (ex: Header) */
+.dark-mode header {
+    background-color: #0f3460;
+}
+
+/* Os cards também devem mudar */
+.dark-mode .card {
+    background-color: #2c3e50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+#btn-toggle-tema {
+    /* Layout e Alinhamento */
+    display: inline-flex;
+    align-items: center; /* Centraliza o ícone e o texto */
+    gap: 8px; /* Espaço entre o ícone (🌙 ou ☀️) e o texto */
+    
+    /* Estilo de Fundo e Texto */
+    background-color: transparent; /* Fundo transparente */
+    color: rgb(4, 0, 255); /* Cor primária azul/roxo */
+    
+    /* Tipografia e Borda */
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 15px;
+    
+    border-radius: 20px; /* Borda bem arredondada (estilo "pill") */
+    cursor: pointer;
+    
+    /* Transição e Posição (se estiver fixo) */
+    transition: all 0.3s ease;
+    
+    /* Sombra sutil */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#btn-toggle-tema:hover {
+    /* Inverte as cores no hover */
+    background-color: rgb(4, 0, 255); 
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: scale(1.05); /* Pequeno aumento para feedback */
+}
+
+
+
+.dark-mode #btn-toggle-tema {
+    /* No Dark Mode, o botão deve se destacar contra o fundo escuro */
+    background-color: #2c3e50; /* Fundo levemente escuro */
+    color: #b7ddf7; /* Texto azul claro */
+    border-color: #b7ddf7; /* Borda azul claro */
+}
+
+.dark-mode #btn-toggle-tema:hover {
+    background-color: #b7ddf7; /* Inverte para o hover */
+    color: #1a1a2e; /* Texto escuro */
+}
 .menu-navegação {
     
     overflow: hidden; /* evita que o conteúdo "vaze" do contêiner e limpa possíveis flutuações (floats) */
@@ -65,7 +127,7 @@ header {
     padding: 16px 32px; 
     text-align: center; 
     text-decoration: none; 
-    display: inline-block;
+    display: inline-block; 
     font-size: 16px;
     margin: 10px;
     transition-duration: 0.4s;
@@ -84,19 +146,19 @@ header {
 .container_relatos,
 .ong-lista {
     background-image: url(photos/luke-chesser-pJadQetzTkI-unsplash.jpg); 
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
+    display: flex; 
+    flex-wrap: wrap;  /* permite que os itens quebrem para a próxima linha */
+    justify-content: center;  /* centraliza os itens horizontalmente */
+    gap: 20px; /* espaço entre os itens */
+    padding: 20px; /* espaçamento interno */
 }
 
 .container {
    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
     margin-top: 40px;
     width: 100%;
 }
