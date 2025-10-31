@@ -1,181 +1,155 @@
-/* ======================================================
-   CONECTASOCIAL - SCRIPT SIMPLES DE VALIDAÇÃO
-   ------------------------------------------------------
-   Este código valida os formulários e aplica pequenas 
-   interações visuais. Pode ser usado em login, cadastro 
-   e recuperação de senha.
-   ====================================================== */
+
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // ======== LOGIN ========
-    let formLogin = document.querySelector("form[action='#'][method='post']");
-    if (formLogin) {
-        formLogin.addEventListener("submit", function(event) {
-            event.preventDefault(); // impede o envio automático
+    // ---  SELETORES GLOBAIS
+    const body = document.body;
+    const btnTema = document.getElementById('btn-toggle-tema');
+    // Captura TODOS os formulários (Login, Cadastro, Recuperação)
+    const todosFormularios = document.querySelectorAll('form'); 
 
-            // Pega os campos
-            let email = document.querySelector("#email");
-            let senha = document.querySelector("#senha");
-            let tipo = document.querySelector("#tipo");
 
-            // Validações simples
-            if (email.value === "" || !email.value.includes("@")) {
-                alert("Digite um e-mail válido!");
-                email.focus();
-                return;
-            }
-
-            if (senha.value.length < 6) {
-                alert("A senha deve ter pelo menos 6 caracteres!");
-                senha.focus();
-                return;
-            }
-
-            if (tipo.value === "") {
-                alert("Selecione o tipo de conta (ONG ou Voluntário)!");
-                tipo.focus();
-                return;
-            }
-
-            alert("✅ Login realizado com sucesso!");
-            formLogin.reset(); // limpa o formulário
-        });
+    //  FUNÇÕES AUXILIARES DE UX E DADOS (Armazenamento Local)
+   
+    
+    //  Dark Mode 
+    function toggleTema() {
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        
+        localStorage.setItem('temaPreferido', isDarkMode ? 'dark' : 'light');
+        btnTema.textContent = isDarkMode ? '🌙 Mudar para Modo Claro' : '☀️ Mudar para Modo Escuro';
     }
 
-    // ======== CADASTRO ========
-    let formCadastro = document.querySelector("form[action='#'][method='get']");
-    if (formCadastro) {
-        formCadastro.addEventListener("submit", function(event) {
-            event.preventDefault();
+    //  Lógica de Máscara (Simplificada)
+    // Função auxiliar para aplicar eventos de máscara
+    const applyInputMask = (selector, maskFunction) => {
+        const input = document.querySelector(selector);
+        if (input) {
+            input.addEventListener("input", function() {
+                this.value = maskFunction(this.value);
+            });
+        }
+    };
 
-            // Captura os campos
-            let nome = document.querySelector("#nome");
-            let email = document.querySelector("#email");
-            let cpf = document.querySelector("#cpf");
-            let telefone = document.querySelector("#telefone");
-            let cep = document.querySelector("#CEP");
-            let senha = document.querySelector("#senha");
-            let termos = document.querySelector("#termos");
+    
+    //  INICIALIZAÇÃO E EVENTOS DE TEMA
+    
 
-            // Validações simples
-            if (nome.value.length < 3) {
-                alert("Digite um nome com pelo menos 3 letras!");
-                nome.focus();
-                return;
+    // Carregar a preferência de tema salva
+    const temaSalvo = localStorage.getItem('temaPreferido');
+    if (temaSalvo === 'dark') {
+        body.classList.add('dark-mode');
+    }
+    
+    // Configura o texto e o evento do botão de tema
+    if (btnTema) {
+        // Inicializa o texto corretamente
+        btnTema.textContent = body.classList.contains('dark-mode') ? '🌙 Mudar para Modo Claro' : '☀️ Mudar para Modo Escuro';
+        btnTema.addEventListener('click', toggleTema);
+    }
+    
+   
+    //  APLICAÇÃO DE MÁSCARAS
+   
+
+    // CPF: 000.000.000-00
+    applyInputMask("#cpf", (valor) => {
+        valor = valor.replace(/\D/g, "");
+        valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+        valor = valor.replace(/(\d{3})(\d)/, "$1.$2");
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        return valor;
+    });
+
+    // Telefone: (00) 00000-0000
+    applyInputMask("#telefone", (valor) => {
+        valor = valor.replace(/\D/g, "");
+        valor = valor.replace(/^(\d{2})(\d)/g, "($1) $2");
+        valor = valor.replace(/(\d{5})(\d{4})$/, "$1-$2");
+        return valor;
+    });
+
+    // CEP: 00000-000
+    applyInputMask("#CEP", (valor) => {
+        valor = valor.replace(/\D/g, "");
+        valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+        return valor;
+    });
+
+    
+    //  LÓGICA DE FORMULÁRIOS (Unificada)
+    
+
+    // Itera sobre todos os formulários encontrados na página
+    todosFormularios.forEach(form => {
+        // Encontra o campo de email em cada formulário (se existir)
+        const emailInput = form.querySelector("#email");
+        
+        // Carregar email salvo (UX)
+        if (emailInput) {
+            const emailSalvo = localStorage.getItem('ultimoEmailCadastro');
+            if (emailSalvo) {
+                emailInput.value = emailSalvo;
             }
+        }
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
 
-            if (!email.value.includes("@")) {
-                alert("Digite um e-mail válido!");
-                email.focus();
-                return;
+            // Se for um formulário com campo de email, salvamos para o próximo acesso (UX)
+            if (emailInput) {
+                // Simples validação de email
+                if (!emailInput.value.includes("@") || emailInput.value.length < 5) {
+                    alert("Digite um e-mail válido!");
+                    emailInput.focus();
+                    return;
+                }
+                localStorage.setItem('ultimoEmailCadastro', emailInput.value);
             }
-
-            if (cpf.value.length < 11) {
-                alert("Digite um CPF com 11 números!");
-                cpf.focus();
-                return;
+            
+            // Lógica de validação do formulário de CADASTRO (se houver o campo nome, é cadastro)
+            const nomeInput = form.querySelector("#nome");
+            if (nomeInput && nomeInput.value.length < 3) {
+                 alert("Digite um nome com pelo menos 3 letras!");
+                 nomeInput.focus();
+                 return;
             }
-
-            if (telefone.value.length < 10) {
-                alert("Digite um telefone válido!");
-                telefone.focus();
-                return;
-            }
-
-            if (cep.value.length < 8) {
-                alert("Digite um CEP com 8 números!");
-                cep.focus();
-                return;
-            }
-
-            if (senha.value.length < 6) {
-                alert("A senha precisa ter pelo menos 6 caracteres!");
-                senha.focus();
-                return;
-            }
-
-            if (!termos.checked) {
+            
+            // Lógica de aceitar termos (se houver o campo termos)
+            const termosInput = form.querySelector("#termos");
+            if (termosInput && !termosInput.checked) {
                 alert("Você precisa aceitar os termos!");
                 return;
             }
 
-            alert("✅ Cadastro realizado com sucesso!");
-            formCadastro.reset();
-        });
-    }
-
-    // ======== RECUPERAÇÃO DE SENHA ========
-    let formRecupera = document.querySelector("form[action='#'][method='post'] input[type='email']");
-    if (formRecupera) {
-        let form = document.querySelector("form");
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            let email = document.querySelector("input[type='email']");
-
-            if (!email.value.includes("@")) {
-                alert("Digite um e-mail válido!");
-                email.focus();
-                return;
-            }
-
-            alert("✅ Link de recuperação enviado para seu e-mail!");
+            // Ação de sucesso genérica
+            let mensagemSucesso = nomeInput ? "✅ Cadastro realizado com sucesso!" : "✅ Ação realizada com sucesso!";
+            alert(mensagemSucesso);
             form.reset();
         });
-    }
+    });
 
-    // ======== MÁSCARAS SIMPLES ========
-    // Adiciona pontuação automaticamente no CPF, telefone e CEP
-    let cpf = document.querySelector("#cpf");
-    if (cpf) {
-        cpf.addEventListener("input", function() {
-            cpf.value = cpf.value
-                .replace(/\D/g, "") // remove o que não for número
-                .replace(/(\d{3})(\d)/, "$1.$2")
-                .replace(/(\d{3})(\d)/, "$1.$2")
-                .replace(/(\d{3})(\d{1,2})$/, "$1-$2");
-        });
-    }
-
-    let tel = document.querySelector("#telefone");
-    if (tel) {
-        tel.addEventListener("input", function() {
-            tel.value = tel.value
-                .replace(/\D/g, "")
-                .replace(/^(\d{2})(\d)/g, "($1) $2")
-                .replace(/(\d{5})(\d{4})$/, "$1-$2");
-        });
-    }
-
-    let cep = document.querySelector("#CEP");
-    if (cep) {
-        cep.addEventListener("input", function() {
-            cep.value = cep.value
-                .replace(/\D/g, "")
-                .replace(/(\d{5})(\d)/, "$1-$2");
-        });
-    }
-
-    // ======== EFEITO NOS BOTÕES ========
-    let botoes = document.querySelectorAll("button, input[type='submit'], input[type='reset']");
-    botoes.forEach(function(botao) {
-        // Quando o mouse passa em cima
+    // ===================================
+    //  EFEITOS VISUAIS NOS BOTÕES (Simplificado com 'this')
+    // ===================================
+    document.querySelectorAll("button, input[type='submit'], input[type='reset']").forEach(function(botao) {
         botao.addEventListener("mouseover", function() {
-            botao.style.backgroundColor = "#b7ddf7"; // cor de destaque
-            botao.style.color = "white";
-            botao.style.transform = "scale(1.05)"; // aumenta um pouco
+            // Se você já tem CSS para isso (como no .botao1:hover), o CSS é mais limpo.
+            // Aqui mantemos o JS para o efeito de escala (transform).
+            this.style.transform = "scale(1.05)";
         });
 
-        // Quando o mouse sai
         botao.addEventListener("mouseout", function() {
-            botao.style.backgroundColor = "";
-            botao.style.color = "";
-            botao.style.transform = "scale(1)";
+            this.style.transform = "scale(1)";
         });
 
-        // Quando o botão é clicado
         botao.addEventListener("mousedown", function() {
-            botao.style.transform = "scale(0.95)"; // encolhe levemente
+            this.style.transform = "scale(0.95)";
+        });
+        
+        botao.addEventListener("mouseup", function() {
+            this.style.transform = "scale(1)"; 
         });
     });
 });
