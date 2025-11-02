@@ -78,7 +78,7 @@ header {
     background-color: #b7ddf7; /* Inverte para o hover */
     color: #1a1a2e; /* Texto escuro */
 }
-.menu-navegaçao {
+.menu-navegacao {
     
     overflow: hidden; /* evita que o conteúdo "vaze" do contêiner e limpa possíveis flutuações (floats) */
     font-size: 16px; 
@@ -89,13 +89,13 @@ header {
 }
 
 /* ======= CADA ITEM (li) DO MENU ======= */
-.menu-navegaçao li {
+.menu-navegacao li {
     float: left; /* faz com que os itens fiquem um ao lado do outro (horizontalmente) */
     list-style-type: none; /* remove as bolinhas (marcadores) padrão da lista */
 }
 
 /* ======= LINKS DENTRO DOS ITENS (a) ======= */
-.menu-navegaçao li a {
+.menu-navegacao li a {
     text-align: center; /* centraliza o texto dentro do botão/link */
     font-family: Comic Sans MS; /* define a fonte do texto (Comic Sans) */
     display: block; /* faz o link ocupar toda a área do botão, facilitando o clique */
@@ -105,7 +105,7 @@ header {
 }
 
 /* ======= EFEITO QUANDO O MOUSE PASSA POR CIMA ======= */
-.menu-navegaçao li a:hover {
+.menu-navegacao li a:hover {
     background-color: #b7ddf7; /* muda a cor de fundo ao passar o mouse (azul claro) */
     color: white; /* mantém o texto branco no hover */
     border-radius: 12px; /* arredonda os cantos do botão */
@@ -272,4 +272,5 @@ img {
         width: calc(33% - 20px);
     }
 }
+
 
