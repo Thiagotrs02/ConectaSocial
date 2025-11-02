@@ -10,7 +10,7 @@ body {
 
 /* ==== CABEÇALHO ==== */
 header {
-    background-color: rgb(4, 0, 255); /* cor de fundo azul */
+    background-image: url(photos/imagem\ para\ cabeçalho.png); /* cor de fundo azul */
     text-align: center; 
     font-size: 24px; 
     padding: 20px; /* espaçamento interno */
@@ -272,3 +272,4 @@ img {
         width: calc(33% - 20px);
     }
 }
+
