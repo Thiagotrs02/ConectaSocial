@@ -62,3 +62,5 @@ CSS3 — estilo e identidade visual
 JavaScript — interatividade e dinamismo
 
 Padrões W3C — boas práticas e acessibilidade
+
+link do site em funcionamento:https://thiagotrs02.github.io/ConectaSocial/
